@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- REQUIRED META TAGS -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- BOOTSTRAP CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+  <link href="css/styles.css" rel="stylesheet">
+
+  <title>EXPORT</title>
+
+</head>
+<body>
+  <!-- MODAL WHEN USER CLICK ON EXPORT BUTTON -->
+  <div id="export" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg" role="content">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <!-- HEADER OF THE MODAL -->
+              <div class="modal-header">
+                  <h4 class="modal-title">Export to Dashboard</h4>
+                  <button type="button" class="close" id="cls" data-dismiss="modal">&times;</button>
+              </div>
+            <!-- MODAL BODY -->
+              <div class="modal-body">
+            <!-- DROPDOWN MENU FOR CHOOSING DASHBOARD -->
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Choose a Dashboard
+                  <span class="caret"></span></button>
+            <!-- LIST OF DROP DOWN MENU -->
+                  <ul class="dropdown-menu" id="dropmenu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation"><input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://adminlte.io/">AdminLTE</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://preview.easetemplate.com/influence/html/influence/index.html">Example</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://dashboardpack.com/live-demo-preview/?livedemo=113&v=c86ee0d9d7ed">Live Demo</a></li>
+
+                  </ul>
+                </div>
+            <!-- CREATE NEW DASHBOARD BUTTON -->
+                <br><h4>or</h4><br>
+                <a href="create.html"><button type="button" class="btn btn-primary btn-sm ml-1">Create a Dashboard</button></a>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- HEADER OF WEBPAGE -->
+  <header>
+    <h1>HEADER</h1>
+  </header>
+
+  <div class="container">
+    <div class="row row-content">
+      <!-- TEXTAREA FOR WRITING SQL CODE -->
+        <textarea class="col-12 col-md-6" id="codearea" rows="20" placeholder="SQL CODE HERE..."></textarea>
+      <!-- OUTPUT FOR THE ABOVE WRITTEN SQL CODE -->
+        <iframe class="col-12 col-md-6" id="result" src="output.html"></iframe>
+    </div>
+  </div>
+<!-- EXPORT BUTTON -->
+  <div class="col-sm-auto ">
+      <a id="xport">
+          <button type="button" class="btn btn-warning">Export to</button>
+      </a>
+  </div>
+
+<!-- FOOTER -->
+  <footer>
+    <!-- BUILD JQUERY POPPER AND BOOTSTRAP SCRIPT -->
+    <!-- BUILD JS/script.js -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="JS/script.js"></script>
+    <script>
+    // SCRIPT FOR OPENING THE MODAL EXPORT
+      $(document).ready(function(){
+      $(".dropdown-toggle").dropdown();
+      });
+
+    // FUNCTION FOR CHOOSING THE DASHBOARD
+      function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("dropmenu");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+          txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </footer>
+</body>
+</html>

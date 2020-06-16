@@ -1,0 +1,16 @@
+/*
+1.open cmd
+ 
+2.go to the directory of the folder
+
+*/
+
+//type
+
+
+npm start
+
+
+//to exit from the cmd
+
+ctrl+c

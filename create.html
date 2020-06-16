@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- REQUIRED META TAGS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <title>Create Dashboard</title>
+  </head>
+
+  <body>
+<!-- HEADER OF THE PAGE -->
+    <header>
+      <h1>HEADER</h1>
+    </header>
+<!-- FORM FOR CREATING THE DASHBOARD -->
+    <form action="action.php" method="POST" autocomplete="off">
+      <h2>Create a Dashboard</h2>
+      <fieldset>
+        <!-- DASHBOARD TITLE -->
+          <div>
+              <label for="dashboardtitle" class="col-12 col-md-2 col-form-label" id="form-detail">Dashboard Title <span class="required">*</span></label>
+              <input type="text" name="dashboardtitle" class="col-12 col-md-5" placeholder="Title here..." required></input>
+          </div><br>
+        <!-- DESCRIPTION OF DASHBOARD -->
+          <div>
+              <label for="description" class="col-md-2 col-form-label">Description</label>
+              <input type="text" name="description" class="col-12 col-md-5" placeholder="Description here..."></input>
+          </div><br>
+        <!-- FOR SELECTING ADMIN -->
+          <div>
+              <label for="admin" class="col-md-2 col-form-label">Admin</label>
+              <div class="autocomplete col-12 col-md-5" style="width:300px;padding-left:3px;">
+                <input id="admin" type="text" name="admin" placeholder="admin (start with 'B')">
+              </div>
+          </div><br>
+        <!-- FOR ON CALL -->
+          <div>
+            <label for="oncall" class="col-12 col-md-2 col-form-label">On Call</label>
+            <div class="autocomplete col-12 col-md-5" style="width:300px;padding-left:3px;">
+              <input id="oncall" type="text" name="oncall" placeholder="On Call (start with 'R')">
+            </div>
+          </div><br>
+        <!-- CHECKBOX FOR PRIVATE -->
+          <div>
+              <label for="private" class="col-12 col-md-2 col-form-label">Make it Private</label>
+              <input type="checkbox" name="private" value="yes"></input>
+          </div>
+      </fieldset>
+    <!-- SUBMIT BUTTON -->
+      <div id="crt">
+        <button type="submit" name="submit" id="create">Create Dashboard</button>
+      </div>
+    </form>
+  <!-- END OF FORM FOR CREATING DASHBOARD -->
+
+
+  <!-- SCRIPTING CODE FOR AUTOCOMPLETE FUNCTION -->
+    <script>
+    function autocomplete(inp, arr) {
+      var currentFocus;
+      inp.addEventListener("input", function(e) {
+          var a, b, i, val = this.value;
+          closeAllLists();
+          if (!val) { return false;}
+          currentFocus = -1;
+          a = document.createElement("DIV");
+          a.setAttribute("id", this.id + "autocomplete-list");
+          a.setAttribute("class", "autocomplete-items");
+          this.parentNode.appendChild(a);
+          for (i = 0; i < arr.length; i++) {
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              b = document.createElement("DIV");
+              b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+              b.innerHTML += arr[i].substr(val.length);
+              b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+              b.addEventListener("click", function(e) {
+                  inp.value = this.getElementsByTagName("input")[0].value;
+                  closeAllLists();
+              });
+              a.appendChild(b);
+            }
+          }
+      });
+    /* FUNCTION WHEN USER PRESSES A KEY */
+      inp.addEventListener("keydown", function(e) {
+          var x = document.getElementById(this.id + "autocomplete-list");
+          if (x) x = x.getElementsByTagName("div");
+          if (e.keyCode == 40) {
+            currentFocus++;
+            addActive(x);
+          } else if (e.keyCode == 38) {
+            currentFocus--;
+            addActive(x);
+          } else if (e.keyCode == 13) {
+            e.preventDefault();
+            if (currentFocus > -1) {
+              if (x) x[currentFocus].click();
+            }
+          }
+      });
+    // ADD ACTIVE CLASS TO AUTOCOMPLETE ITEMS
+      function addActive(x) {
+        if (!x) return false;
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+    //REMOVE ACTIVE CLASS FROM AUTOCOMPLETE ITEMS
+      function removeActive(x) {
+          for (var i = 0; i < x.length; i++) {
+          x[i].classList.remove("autocomplete-active");
+        }
+      }
+    //CLOSE ALL AUTOCOMPLETE LIST
+      function closeAllLists(elmnt) {
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+          if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+    //FUNCTION WHEN USER CLICK ON THE DOCUMENTS
+      document.addEventListener("click", function (e) {
+          closeAllLists(e.target);
+      });
+    }
+  //ARRAY
+    var admin = ["Bob","Brian","Bobby","Ram","Jack","Sam"];
+    var oncall = ["Roomie","Robin","Alex","Ronnie","abc","xyz","Max"]
+  //FUNCTION CALLED WHEN USER TYPES ON AUTOCOMPLETE INPUT FIELD
+    autocomplete(document.getElementById("admin"), admin);
+    autocomplete(document.getElementById("oncall"), oncall);
+    </script>
+  </body>
+</html>

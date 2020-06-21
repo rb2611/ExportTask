@@ -11,8 +11,12 @@ label {
 #crt {
   text-align: center;
 }
+.modal-header {
+  background-color:orange;
+}
 .modal-body {
   text-align: center;
+  background-color:#DED8E1;
 }
 h2 {
   text-align: left;

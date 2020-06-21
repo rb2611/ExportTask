@@ -4,5 +4,4 @@ $(document).ready(function(){
     $("#export").modal('toggle');
     $("#export").modal('show');
   });
-
 });

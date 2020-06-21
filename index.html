@@ -13,12 +13,12 @@
   <link href="css/styles.css" rel="stylesheet">
 
   <title>EXPORT</title>
-
+  <script src="./index.js"></script>
 </head>
 <body>
   <!-- MODAL WHEN USER CLICK ON EXPORT BUTTON -->
   <div id="export" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg" role="content">
+      <div class="modal-dialog modal-lg" role="content" #content>
           <!-- Modal content-->
           <div class="modal-content">
             <!-- HEADER OF THE MODAL -->
@@ -75,7 +75,7 @@
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="JS/script.js"></script>
+    <script src="index.js"></script>
     <script>
     // SCRIPT FOR OPENING THE MODAL EXPORT
       $(document).ready(function(){
@@ -98,6 +98,15 @@
           }
         }
       }
+    </script>
+    <script>
+    $(document).ready(function(){
+      $("#xport").click(function(){
+        $("#export").modal({ keyboard: false });
+        $("#export").modal('toggle');
+        $("#export").modal('show');
+      });
+    });
     </script>
   </footer>
 </body>

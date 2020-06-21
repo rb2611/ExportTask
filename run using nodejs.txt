@@ -1,3 +1,4 @@
+for zip folder first extract the file
 /*
 1.open cmd
  
